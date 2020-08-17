@@ -26,7 +26,8 @@ app.use(express.static('website'));
 app.use(express.static('dist'));
 
 // Setup Server
-const port = 3000;
+const port = 3030;
+
 const server = app.listen(port, listening);
  function listening(){
     // console.log(server);
@@ -37,8 +38,8 @@ const server = app.listen(port, listening);
 let geoNamesUser = process.env.API_ID;
 let weatherApiKey = process.env.API_KEY;
 
-// Function to complete GET '/all for user input on travel details'
-app.get("/all", (req, res) => {
+// Function to complete GET /all for user input on travel details'
+app.get('/all', (req, res) => {
   res.send(projectData);
   console.log(projectData);
 });
@@ -78,7 +79,7 @@ app.get('/geoNames', (req, res) => {
     res.send(true);
   }).catch(error => {
     res.send(JSON.stringify({error: error}))
-  })
+  });
 
 // Then, add a POST route that adds incoming data to projectData.
 // app.post('/addData', function(req, res) {
