@@ -19,7 +19,7 @@ function init() {
 //       } catch (error) {
 //         console.log("error", error);
 //       }
-}
+// }
 
 /* Global Variables */
 const travelCard = document.getElementById('travel-card');
