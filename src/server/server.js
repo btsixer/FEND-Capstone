@@ -80,7 +80,7 @@ app.get('/geoNames', (req, res) => {
   }).catch(error => {
     res.send(JSON.stringify({error: error}))
   });
-
+})
 // Then, add a POST route that adds incoming data to projectData.
 // app.post('/addData', function(req, res) {
   // res.send('Test the POST route');
