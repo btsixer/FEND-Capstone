@@ -56,13 +56,13 @@ app.post('/createTrip', (req, res) => {
   const endDays = req.body.endDate.slice(0, 10);
 
   projectData.location = req.body.location;
-  projectData.startDate = startDays
-  projectData.endDate = endDays
+  projectData.startDate = startDays;
+  projectData.endDate = endDays;
   projectData.duration = req.body.duration;
 
   console.log(projectData);
   res.send('ok');
-})
+});
 
 // Add a GET route that returns the geoNames location data into lat / long variables for the next API
 app.get('/geoNames', (req, res) => {
@@ -80,7 +80,7 @@ app.get('/geoNames', (req, res) => {
   }).catch(error => {
     res.send(JSON.stringify({error: error}))
   });
-})
+});
 // Then, add a POST route that adds incoming data to projectData.
 // app.post('/addData', function(req, res) {
   // res.send('Test the POST route');
@@ -93,3 +93,15 @@ app.get('/geoNames', (req, res) => {
 	// res.send(projectData);
   // console.log(projectData);
 // });
+
+// Global functions
+const getData = async (url) => {
+  const response = await fetch(url);
+  try {
+    const data = await response.json();
+    // console.log(data);
+    return data;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
