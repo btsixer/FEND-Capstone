@@ -21,6 +21,35 @@ const postData = async ( url='', data={})=>{
       };
 };
 
+export const getData = async (url) => {
+  const response = await fetch(url);
+  try {
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
+export const updateUI = async (url) => {
+  const response = await fetch(url);
+  try {
+    const data = await response.json();
+    // document.getElementById("results-image").src = data.img;
+    // document.getElementById("result-destination").innerHTML = `Trip to: ${data.location}`
+    // document.getElementById("result-departure").innerHTML = `Departure: ${data.startDate}`
+    // document.getElementById("result-return").innerHTML = `Return: ${data.endDate}`
+    // document.getElementById("result-duration").innerHTML = `Duration: ${data.duration} days`
+    // document.getElementById("trip-start").innerHTML = `Your trip is ${data.timeTillTravel} days from now`
+    // document.getElementById("result-temp").innerHTML = `${data.temp}°F`
+    // document.getElementById("result-description").innerHTML = `${data.description}`
+    document.getElementById('allData').innerHTML = 'Hello, your trip details are below. /n `Trip to: ${data.location}`'
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
 /* Global Variables */
 const travelCard = document.getElementById('input-submit');
 // const travelResults = document.getElementById('travel-results');
@@ -45,9 +74,21 @@ export async function handleSubmit(event) {
   console.log(`returnDate:  ${returnDate}`);
   console.log(`daysInTravel: ${daysInTravel}`);
   console.log(`Form Submitted! Time stamp: ${event.timeStamp}`);
+
+  // Let the functions run async and wait until completion
+  await Client.getData('http://localhost:3030/geoNames')
+  await Client.getData('http://localhost:3030/weatherBit')
+  await Client.getData('http://localhost:3030/pixabay')
+  await Client.updateUI('http://localhost:3030/all')
 }
 
 travelCard.addEventListener('click', handleSubmit);
+
+// await Client.getData('http://localhost:3030/geoNames')
+// await Client.getData('http://localhost:3030/weatherBit')
+// await Client.getData('http://localhost:3030/pixabay')
+// await Client.updateUI('http://localhost:3030/all')
+// travelCard.style.display = 'none';
 
 export {
   //main function from app.js
