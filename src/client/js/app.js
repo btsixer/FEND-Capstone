@@ -1,5 +1,5 @@
 function init() {
-  console.log('Initialing.. begin gathering trip details.');
+  console.log('Initializing.. begin gathering trip details.');
 }
 
 const postData = async ( url='', data={})=>{
@@ -21,6 +21,7 @@ const postData = async ( url='', data={})=>{
       };
 };
 
+// export const getData = async (url) => {
 export const getData = async (url) => {
   const response = await fetch(url);
   try {
@@ -33,6 +34,7 @@ export const getData = async (url) => {
 };
 
 export const updateUI = async (url) => {
+  console.log('UpdateUI function starting');
   const response = await fetch(url);
   try {
     const data = await response.json();
@@ -54,7 +56,8 @@ export const updateUI = async (url) => {
 const travelCard = document.getElementById('input-submit');
 // const travelResults = document.getElementById('travel-results');
 
-export async function handleSubmit(event) {
+// export async function handleSubmi t(event) {
+async function handleSubmit(event) {
   // Set submit data into key variables
   const destination = document.getElementById('input-destination').value;
   const departureDate = document.getElementById('input-date').value;
@@ -74,12 +77,11 @@ export async function handleSubmit(event) {
   console.log(`returnDate:  ${returnDate}`);
   console.log(`daysInTravel: ${daysInTravel}`);
   console.log(`Form Submitted! Time stamp: ${event.timeStamp}`);
-
   // Let the functions run async and wait until completion
-  await Client.getData('http://localhost:3030/geoNames')
-  await Client.getData('http://localhost:3030/weatherBit')
-  await Client.getData('http://localhost:3030/pixabay')
-  await Client.updateUI('http://localhost:3030/all')
+  await getData('http://localhost:3030/geoNames');
+  await getData('http://localhost:3030/weatherBit');
+  await getData('http://localhost:3030/pixabay');
+  await updateUI('http://localhost:3030/all');
 }
 
 travelCard.addEventListener('click', handleSubmit);
