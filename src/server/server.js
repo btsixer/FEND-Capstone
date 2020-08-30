@@ -61,7 +61,7 @@ app.post('/createTrip', (req, res) => {
   const startDays = req.body.startDate.slice(0, 10);
   const endDays = req.body.endDate.slice(0, 10);
 
-  projectData.location = req.body.alocation;
+  projectData.location = req.body.location;
   projectData.startDate = startDays;
   projectData.endDate = endDays;
   projectData.duration = req.body.duration;
