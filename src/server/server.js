@@ -71,22 +71,48 @@ app.post('/createTrip', (req, res) => {
 });
 
 // Add a GET route that returns the geoNames location data into lat / long variables for the next API
-app.get('/geoNames', (req, res) => {
-  console.log('GET geonames');
-  const url = `http://api.geonames.org/searchJSON?placename=${projectData.location}&maxRows=1&username=${process.env.GEONAMES_API_ID}`
-  console.log(url);
-  getData(url).then(response => {
-    console.log('Data from Genames[0]')
-    console.log(response.geonames[0]);
-    projectData.lat = response.geonames[0].lat;
-    projectData.long = response.geonames[0].lng;
+// app.get('/geoNames', (req, res) => {
+//   console.log('GET geonames');
+//   const url = `http://api.geonames.org/searchJSON?placename=${projectData.location}&maxRows=1&username=${process.env.GEONAMES_API_ID}`
+//   console.log(url);
+//   getData(url).then(response => {
+//     console.log('Data from Genames[0]')
+//     console.log(response.geonames[0]);
+//     projectData.lat = response.geonames[0].lat;
+//     projectData.long = response.geonames[0].lng;
+//
+//     console.log('projectData is: ', projectData);
+//     res.send(true);
+//   }).catch(error => {
+//     res.send(JSON.stringify({error: error}))
+//   });
+// });
 
-    console.log('projectData is: ', projectData);
-    res.send(true);
-  }).catch(error => {
-    res.send(JSON.stringify({error: error}))
-  });
-});
+// Testing based on help from Shubham
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+public class QUERYPARAMETERRequest {
+
+  @Test
+        public void queryParameter() {
+
+    RestAssured.baseURI ="http://api.geonames.org/searchJSON";
+    RequestSpecification request = RestAssured.given();
+
+    Response response = request.queryParam("placename", "hollister")
+                           .queryParam(`${process.env.GEONAMES_API_ID}`)
+                           .get("/geoNames");
+
+    String jsonString = response.asString();
+    System.out.println(response.getStatusCode());
+    Assert.assertEquals(jsonString.contains("hollister"), true);
+
+  }
+}
 
 app.get('/weatherBit', (req, res) => {
   console.log('GET weatherBit');
