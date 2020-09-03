@@ -2,6 +2,27 @@ function init() {
   console.log('Initializing.. begin gathering trip details.');
 }
 
+// Third attempt at evaluating user input and passing the placename into the /GET request appropriately
+// !!! DID NOT WORK _ THREW AN ERROR ON NPM RUN BUILD-PROD THAT WOULD NOT COMPILE
+// let geoNamesBaseURL = 'http://api.geonames.org/searchJSON?placename=';
+// document.getElementById('input-destination').addEventListener('click', passThePlacename);
+//
+// function passThePlacename(e) {
+//   const newPlacename = document.getElementById('input-destination').value;
+//   getPlacename(geoNamesBaseURL,newPlacename,geoNamesUser)
+// }
+//
+// const getPlacename = async (geoNamesBaseURL, input-destination, geoNamesUser)=> {
+//   const res = await fetch(geoNamesBaseURL+input-destination+geoNamesUser)
+//   try {
+//     const data = await res.json();
+//     console.log(data)
+//     return data;
+//   } catch (e) {
+//     console.log("error", error);
+//   }
+// };
+
 const postData = async ( url='', data={})=>{
     const response = await fetch(url, {
         method: 'POST',
